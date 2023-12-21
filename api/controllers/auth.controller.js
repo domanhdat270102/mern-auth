@@ -4,8 +4,8 @@ import {errorHandler} from '../util/error.js'
 import {catchAsync} from '../util/catchAsync.js'
 
 export const signup = catchAsync(async (req, res, next) => {
-    const {userName, email, password} = req.body;
-    const newUser = new User({userName, email, password});
+    const {username, email, password} = req.body;
+    const newUser = new User({username, email, password});
     // try {
     //     await newUser.save()
     //     res.status(200).json({
