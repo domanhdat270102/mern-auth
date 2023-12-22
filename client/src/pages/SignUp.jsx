@@ -50,7 +50,7 @@ export default function SignUp() {
 
         <input type="password" placeholder="password" id="password" onChange={handleChange} className="border p-3 rounded-lg"/>
 
-        <button disabled={loading} className="bg-slate-700 rounded-lg text-white p-3 hover:opacity-95 disabled:opacity-80">
+        <button disabled={loading} className="bg-slate-700 rounded-lg text-white p-3 hover:opacity-95 disabled:opacity-80 uppercase">
           {loading ? 'Loading...' : 'Sign up'}
         </button>
 
