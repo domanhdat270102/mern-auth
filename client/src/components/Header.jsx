@@ -18,7 +18,7 @@ export default function Header() {
               <input type="text" placeholder="Search..." className="bg-transparent focus:outline-none w-24 sm:w-64"/>
               <FaSearch className="text-slate-600"/>
             </form>
-            <ul className="flex gap-4">
+            <ul className="flex gap-4 items-center  ">
               <Link to={'/'}>
                 <li className="hidden sm:inline hover:underline text-slate-700">
                   Home
@@ -30,12 +30,6 @@ export default function Header() {
                   About
                 </li>
               </Link>
-
-              {/* <Link to={'/sign-in'}>
-                <li className="hidden sm:inline hover:underline text-slate-700">
-                  Sign in
-                </li>
-              </Link> */}
               <Link to={'/profile'}>
               {currentUser ? (
                   <img src={currentUser.avatar} alt="profile" className="rounded-full w-7 h-7 object-cover"/>
