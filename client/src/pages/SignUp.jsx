@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Oauth from "../components/Oauth";
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -53,7 +54,8 @@ export default function SignUp() {
         <button disabled={loading} className="bg-slate-700 rounded-lg text-white p-3 hover:opacity-95 disabled:opacity-80 uppercase">
           {loading ? 'Loading...' : 'Sign up'}
         </button>
-
+        
+        <Oauth />
         <div className="mt-5 flex gap-2">
           <p>Have an account</p>
           <Link to={"/sign-in"}>

@@ -15,14 +15,18 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    avatar: {
+        type: String,
+        default: "https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png"
     }
 }, {timestamps: true})
 
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 12)
-    next();
-})
+// userSchema.pre('save', async function (next) {
+//     if (!this.isModified('password')) return next();
+//     this.password = await bcrypt.hash(this.password, 12)
+//     next();
+// })
 
 const User = mongoose.model('User', userSchema)
 
