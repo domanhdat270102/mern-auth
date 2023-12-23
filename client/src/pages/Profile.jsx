@@ -13,6 +13,7 @@ import {
   signoutUserStart,
   signoutUserSuccess
 } from '../redux/user/userSlice'
+import {Link} from 'react-router-dom'
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector(state => state.user)
@@ -175,6 +176,10 @@ const handleSignOut = async () => {
           <button disabled={loading} className="p-3 bg-slate-700 text-white uppercase rounded-lg hover:opacity-95 disabled:opacity-80">
               {loading ? "Loading...": "Update"}
           </button>
+
+          <Link to={'/create-listing'} className="w-full bg-green-700 text-white text-center p-3 rounded-lg uppercase hover:opacity-95">
+            Create Listing
+          </Link>
 
           <div className="flex justify-between">
             <span className="text-red-700 cursor-pointer" onClick={handleDeleteUser}>
