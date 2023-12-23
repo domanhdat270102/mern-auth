@@ -24,7 +24,6 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false)
   const [updateSuccess, setUpdateSuccess] = useState(false)
   const [formData, setFormData] = useState({})
-  console.log(formData);
   // allow read;
   // allow write: if
   // request.resource.size < 2 * 1024 * 1024 &&
