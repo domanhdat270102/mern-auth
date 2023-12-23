@@ -23,6 +23,8 @@ export default function Profile() {
   const [filePerc, setFilePerc] = useState(0)
   const [fileUploadError, setFileUploadError] = useState(false)
   const [updateSuccess, setUpdateSuccess] = useState(false)
+  const [showListingsError, setShowListingsError] = useState(false)
+  const [userListings, setUserListings] = useState([])
   const [formData, setFormData] = useState({})
   // allow read;
   // allow write: if
@@ -115,6 +117,23 @@ const handleSignOut = async () => {
     dispatch(signoutUserFailure(error.message))
   }
 }
+
+const handleShowListings = async () => {
+  try {
+    setShowListingsError(false)
+    const res = await fetch(`/api/user/listings/${currentUser._id}`)
+    const data = await res.json()
+
+    if (data.success === false) {
+      setShowListingsError(true)
+      return;
+    }
+
+    setUserListings(data)
+  } catch (error) {
+    setShowListingsError(true)
+  }
+}
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
@@ -179,8 +198,8 @@ const handleSignOut = async () => {
           <Link to={'/create-listing'} className="w-full bg-green-700 text-white text-center p-3 rounded-lg uppercase hover:opacity-95">
             Create Listing
           </Link>
-
-          <div className="flex justify-between">
+      </form>
+          <div className="flex justify-between mt-5">
             <span className="text-red-700 cursor-pointer" onClick={handleDeleteUser}>
               Delete Account
             </span>
@@ -194,7 +213,33 @@ const handleSignOut = async () => {
           <p className='text-green-700 mt-5'>
               {updateSuccess ? "User is updated successfully!" :  ""}
           </p>
-      </form>
+
+          <button onClick={handleShowListings} className="text-green-700 w-full">Show Listings</button>
+          <p className="text-red-700 mt-5">{showListingsError ? 'Error showing listings' : ''}</p>
+
+          {userListings && userListings.length > 0 && (
+            <div className="flex flex-col gap-4">
+                <h1 className="text-center mt-7 font-semibold text-2xl">
+                  Your Listings
+                </h1>
+                {userListings.map(listing => (
+            <div key={listing._id} className="border rounded-lg p-3 flex justify-between items-center gap-4">
+                <Link to={`/listing/${listing._id}`}>
+                    <img src={listing.imageUrls[0]} alt="listing cover" className="h-16 w-16 object-contain" />
+                </Link>
+
+                <Link to={`/listing/${listing._id}`} className="text-slate-700 font-semibold hover:underline flex-1 truncate" >
+                    <p>{listing.name}</p>
+                </Link>
+
+                <div className="flex flex-col items-center">
+                    <button className="uppercase text-red-700">Delete</button>
+                    <button className="uppercase text-green-700">Edit</button>
+                </div>
+            </div>
+          ))}
+            </div> 
+          )}
     </div>
   )
 }
