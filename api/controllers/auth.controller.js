@@ -49,3 +49,9 @@ export const google = catchAsync(async (req, res, next) => {
         res.cookie('access_token', token, { httpOnly: true}).status(200).json(rest)
     }
 })
+
+
+export const signout = catchAsync (async (req, res, next) => {
+    res.clearCookie('access_token')
+    res.status(200).json('User has been logged out')
+})
