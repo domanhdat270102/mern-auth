@@ -1,6 +1,7 @@
 import User from '../models/user.model.js'
 import {catchAsync} from '../util/catchAsync.js'
 import { errorHandler } from '../util/error.js'
+import Listing from '../models/listing.model.js'
 import bcrypt from 'bcryptjs'
 export const test = (req,res) => {
     res.json({
@@ -33,4 +34,13 @@ export const deleteUser = catchAsync (async (req, res, next) => {
     await User.findByIdAndDelete(req.params.id)
     res.clearCookie('access_token')
     res.status(200).json('User has been deleted!')
+})
+
+export const getUserListings = catchAsync (async (req, res, next) => {
+    if (req.user.id === req.params.id) {
+        const listings = await Listing.find({useRef: req.params.id})
+        res.status(200).json(listings)
+    } else {
+        return next(errorHandler(401, 'You can only view your own listings!'))
+    }
 })
