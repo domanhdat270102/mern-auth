@@ -38,3 +38,11 @@ export const updateListing = catchAsync(async (req, res, next) => {
     })
     res.status(200).json(updatedListing)
 })
+
+export const getListing = catchAsync(async (req, res, next) => {
+    const listing = await Listing.findById(req.params.id);
+    if (!listing) {
+        return next(errorHandler(404, 'Listing not found'));
+    }
+    res.status(200).json(listing)
+})
