@@ -7,6 +7,7 @@ import 'swiper/css/bundle'
 import ListingItem from "../components/ListingItem";
 import { useDispatch } from "react-redux";
 import { deleteUserSuccess, signInSuccess } from "../redux/user/userSlice";
+import {TypeAnimation} from 'react-type-animation'
 
 export default function Home() {
   SwiperCore.use([Navigation])
@@ -70,8 +71,22 @@ export default function Home() {
   return (
     <div>
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-3xl text-slate-700 font-bold lg:text-6xl">
-          Find your next <span className="text-slate-500">perfect</span>
+        <h1 className="text-3xl text-red-400 font-bold lg:text-6xl">
+          Find your next {' '}
+          <span className="text-amber-400">
+          <TypeAnimation 
+            sequence={[
+              'perfect',
+              2000,
+              'convenient',
+              2000,
+            ]}
+            speed={50}
+            wrapper='span'
+            repeat={Infinity}
+          />
+
+          </span>
           <br />
           place with ease
         </h1>
