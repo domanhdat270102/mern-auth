@@ -31,7 +31,7 @@ export default function Search() {
         ) {
             setSidebardata({
                 searchTerm: searchTermFromUrl || '',
-                type: typeFromUrl || '',
+                type: typeFromUrl || 'all',
                 parking: parkingFromUrl === 'true' ? true : false,
                 furnished: furnishedFromUrl === 'true' ? true : false,
                 offer: offerFromUrl === 'true' ? true : false,
@@ -195,7 +195,7 @@ export default function Search() {
                     <p className="text-xl text-slate-700 text-center w-full">Loading...</p>
                 )}
                     {!loading && listings && listings.length > 0 && listings.map((listing, index) => (
-                        <ListingItem listing={listing} />
+                        <ListingItem key={index} listing={listing} />
                     ))}
 
                     {showMore && (
