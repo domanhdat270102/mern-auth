@@ -194,9 +194,11 @@ export default function Search() {
                 {loading && (
                     <p className="text-xl text-slate-700 text-center w-full">Loading...</p>
                 )}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3">
                     {!loading && listings && listings.length > 0 && listings.map((listing, index) => (
                         <ListingItem key={index} listing={listing} />
                     ))}
+                    </div>
 
                     {showMore && (
                         <button className="text-green-700 hover:underline p-7 text-center w-full" onClick={() => {

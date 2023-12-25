@@ -26,8 +26,8 @@ export default function Header() {
         <div className="max-w-6xl mx-auto flex justify-between items-center p-3">
           <Link to='/'>
             <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-              <span className="text-slate-500">Sahara</span>
-              <span className="text-slate-700">Estate</span>
+              <span className="text-slate-500">Bất động</span>
+              <span className="text-slate-700">Sản</span>
             </h1>
           </Link>
 
@@ -49,6 +49,15 @@ export default function Header() {
                   About
                 </li>
               </Link>
+              
+              {!currentUser && (
+                <Link to={'/sign-up'}>
+                  <li className="hidden sm:inline hover:underline text-slate-700">
+                      Sign up
+                  </li>
+                </Link>
+              )}
+
               <Link to={'/profile'}>
               {currentUser ? (
                   <img src={currentUser.avatar} alt="profile" className="rounded-full w-7 h-7 object-cover"/>

@@ -5,13 +5,16 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from 'swiper'
 import 'swiper/css/bundle'
 import ListingItem from "../components/ListingItem";
+import { useDispatch } from "react-redux";
+import { deleteUserSuccess, signInSuccess } from "../redux/user/userSlice";
 
 export default function Home() {
   SwiperCore.use([Navigation])
+  const dispatch = useDispatch()
   const [offerListings, setOfferListings] = useState([])
   const [saleListings, setSaleListings] = useState([])
   const [rentListings, setRentListings] = useState([])
-  console.log(offerListings.map(listting => listting.imageUrls[0]));
+  console.log('offerListings', offerListings);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -47,6 +50,23 @@ export default function Home() {
     }
     fetchOfferListings()
   },[])
+
+  useEffect(() => {
+    const isLogin = async () => {
+      try {
+        const res = await fetch('/api/auth/isLogin')
+        const data = await res.json()
+        if (data.success === false) {
+          dispatch(deleteUserSuccess(data.message))
+          return;
+        }
+        dispatch(signInSuccess(data))
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    isLogin()
+  },[])
   return (
     <div>
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
@@ -65,15 +85,16 @@ export default function Home() {
         <Link to={'/search'} className="text-blue-700 font-bold">
           Let&apos;s get started...
         </Link>
-
-        <Swiper navigation>
-          {offerListings && offerListings.length > 0 && offerListings.map((listing) => (
-            <SwiperSlide key={listing._id}>
-            <div className="h-[500px]" style={{background: `url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize: 'cover' }}>
-            </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div>
+          <Swiper navigation>
+            {offerListings && offerListings.length > 0 && offerListings.map((listing) => (
+              <SwiperSlide key={listing}>
+              <div className="h-[500px]" style={{background: `url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize: 'cover' }}>
+              </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
         <div>
           {offerListings && offerListings.length > 0 && (
@@ -85,7 +106,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3">
                 {offerListings.map(listing => (
                   <ListingItem listing={listing} key={listing._id} />
                 ))}
@@ -102,7 +123,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3">
                 {rentListings.map(listing => (
                   <ListingItem listing={listing} key={listing._id} />
                 ))}
@@ -113,13 +134,13 @@ export default function Home() {
           {saleListings && saleListings.length > 0 && (
             <div>
               <div className="my-3">
-                <h2 className="text-2xl font-semibold text-slate-600">Recent offers</h2>
+                <h2 className="text-2xl font-semibold text-slate-600">Recent place for sale</h2>
                 <Link to={'/search?type=sale'} className="text-sm text-blue-800 hover:underline">
                   Show more place for sale
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3">
                 {saleListings.map(listing => (
                   <ListingItem listing={listing} key={listing._id} />
                 ))}
