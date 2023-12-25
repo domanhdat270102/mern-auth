@@ -8,6 +8,8 @@ import ListingItem from "../components/ListingItem";
 import { useDispatch } from "react-redux";
 import { deleteUserSuccess, signInSuccess } from "../redux/user/userSlice";
 import {TypeAnimation} from 'react-type-animation'
+import {motion} from 'framer-motion'
+import { fadeIn } from "../components/variants";
 
 export default function Home() {
   SwiperCore.use([Navigation])
@@ -71,7 +73,16 @@ export default function Home() {
   return (
     <div>
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-3xl text-red-400 font-bold lg:text-6xl">
+        <motion.h1
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.5,
+          ease: [0, 0.71, 0.2, 1.01]
+        }}
+          className="text-3xl text-red-400 font-bold lg:text-6xl"
+          >
           Find your next {' '}
           <span className="text-amber-400">
           <TypeAnimation 
@@ -89,7 +100,7 @@ export default function Home() {
           </span>
           <br />
           place with ease
-        </h1>
+        </motion.h1>
 
         <div className="text-gray-400 text-xs sm:text-sm">
           Saharand Estate is the best place find to your next perfect place to live
