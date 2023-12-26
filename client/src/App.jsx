@@ -10,9 +10,11 @@ import CreateListing from "./pages/CreateListing"
 import UpdateListing from "./pages/UpdateListing"
 import Listing from './pages/Listing'
 import Search from "./pages/Search"
+import { Toaster } from 'react-hot-toast';
 const App = () => {
   return (
   <BrowserRouter>
+    <Toaster />
     <Header />
     <Routes>
       <Route path="/" element={<Home />}/>

@@ -5,11 +5,11 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from 'swiper'
 import 'swiper/css/bundle'
 import ListingItem from "../components/ListingItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUserSuccess, signInSuccess } from "../redux/user/userSlice";
 import {TypeAnimation} from 'react-type-animation'
 import {motion} from 'framer-motion'
-import { fadeIn } from "../components/variants";
+import toast from "react-hot-toast";
 
 export default function Home() {
   SwiperCore.use([Navigation])
@@ -17,8 +17,8 @@ export default function Home() {
   const [offerListings, setOfferListings] = useState([])
   const [saleListings, setSaleListings] = useState([])
   const [rentListings, setRentListings] = useState([])
-  console.log('offerListings', offerListings);
-
+  const { currentUser } = useSelector(state => state.user)
+  console.log(currentUser);
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -70,6 +70,52 @@ export default function Home() {
     }
     isLogin()
   },[])
+
+  useEffect(() => {
+    if (currentUser?.username) {
+      const hasShownWelcomeForUser = localStorage.getItem(`hasShownWelcome_${currentUser?.username}`);
+  
+      if (!hasShownWelcomeForUser) {
+        toast.custom((t) => (
+          <div
+            className={`${
+              t.visible ? 'animate-enter' : 'animate-leave'
+            } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+          >
+            <div className="flex-1 w-0 p-4">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 pt-0.5">
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src={currentUser?.avatar}
+                    alt=""
+                  />
+                </div>
+                <div className="ml-3 flex-1">
+                  <p className="text-sm font-medium text-gray-900">
+                    {currentUser?.username}
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Welcome to website
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex border-l border-gray-200">
+              <button
+                onClick={() => toast.dismiss(t.id)}
+                className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        ))
+        localStorage.setItem(`hasShownWelcome_${currentUser?.username}`, 'true');
+        console.log('alo');
+      }
+    }
+  }, [currentUser?.username]);
   return (
     <div>
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
@@ -114,7 +160,7 @@ export default function Home() {
         <div>
           <Swiper navigation>
             {offerListings && offerListings.length > 0 && offerListings.map((listing) => (
-              <SwiperSlide key={listing}>
+              <SwiperSlide key={listing._id}>
               <div className="h-[500px]" style={{background: `url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize: 'cover' }}>
               </div>
               </SwiperSlide>
