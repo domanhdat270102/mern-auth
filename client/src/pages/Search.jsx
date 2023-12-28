@@ -255,7 +255,6 @@ export default function Search() {
         console.log('a', queryParams);
     }, [location.search]);
 
-
     useEffect(() => {
         const fetchListings = async () => {
             setLoading(true)
@@ -325,6 +324,7 @@ export default function Search() {
         }
         setListings([...listings, ...data])
     }
+    console.log(sidebardata);
   return (
     <div className="flex flex-col md:flex-row">
         <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen md:min-w-[400px]">

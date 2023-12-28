@@ -24,7 +24,7 @@ export default function ForgotPassword() {
           }
           try {
             dispatch(signInStart())
-            const res = await fetch('/api/forgot-password/', {
+            const res = await fetch('/api/forgot-password', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
