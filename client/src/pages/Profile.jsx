@@ -14,6 +14,7 @@ import {
   signoutUserSuccess
 } from '../redux/user/userSlice'
 import {Link} from 'react-router-dom'
+import { IoCameraOutline } from "react-icons/io5";
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector(state => state.user)

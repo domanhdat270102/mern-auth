@@ -62,7 +62,7 @@ console.log('loginFormik.values.email', loginFormik.values.email);
   return (
     <div>
         <div className="max-w-lg p-3 mx-auto">
-      <h1 className="text-center my-7 text-3xl font-semibold">Điền email của bạn</h1>
+      <h1 className="text-center my-7 text-3xl font-semibold">Cập nhập mật khẩu</h1>
       <form className="flex flex-col gap-4" onSubmit={loginFormik.handleSubmit}>
               <Input
                 id="otp"
