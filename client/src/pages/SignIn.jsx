@@ -163,7 +163,11 @@ export default function SignUp() {
                     : ""
                 }
               />
-
+        <div className="flex justify-end">
+          <Link to={'/forgot-password'}>
+          <p className="text-blue-700 hover:underline cursor-pointer">Forgot password</p>
+          </Link>
+        </div>
         <button disabled={loading} className="bg-slate-700 rounded-lg text-white p-3 hover:opacity-95 disabled:opacity-80 uppercase">
           {loading ? 'Loading...' : 'Sign in'}
         </button>

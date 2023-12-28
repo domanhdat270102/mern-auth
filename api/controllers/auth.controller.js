@@ -6,7 +6,10 @@ import jwt from 'jsonwebtoken'
 
 export const signup = catchAsync(async (req, res, next) => {
     const {username, email, password} = req.body;
-    if (email) return next(errorHandler(401, 'Email đã tồn tại'))
+    const existingUser = await User.findOne({email})
+    if (existingUser) {
+        return next(errorHandler('401', 'Email đã tồn tại'))
+    }
     const hashedPassword = bcrypt.hashSync(password, 10)    
     const newUser = new User({username, email, password: hashedPassword});
     // try {

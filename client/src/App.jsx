@@ -11,6 +11,8 @@ import UpdateListing from "./pages/UpdateListing"
 import Listing from './pages/Listing'
 import Search from "./pages/Search"
 import { Toaster } from 'react-hot-toast';
+import ForgotPassword from "./pages/ForgotPassword"
+import CheckOTP from "./pages/CheckOTP"
 const App = () => {
   return (
   <BrowserRouter>
@@ -22,7 +24,9 @@ const App = () => {
       <Route path="/sign-in" element={<SignIn />}/>
       <Route path="/sign-up" element={<SignUp />}/>
       <Route path="/search" element={<Search />}/>
-      <Route path="/listing/:listingId" element={<Listing />}/>
+      <Route path="/forgot-password" element={<ForgotPassword />}/>
+      <Route path="/forgot-password" element={<ForgotPassword />}/>
+      <Route path="/check-otp" element={<CheckOTP />}/>
       <Route element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />}/>
         <Route path="/create-listing" element={<CreateListing />}/>

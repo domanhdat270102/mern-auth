@@ -335,7 +335,7 @@ export default function CreateListing() {
                     && 
                     formData.imageUrls.map((url, index) => (
                         <div className='flex justify-between p-3 border items-center' key={url}>
-                            <img src={url} className='w-20 h-20 object-contain rounded-xl'/>
+                            <img loading='lazy' src={url} className='w-20 h-20 object-contain rounded-xl'/>
                             <button type='button' onClick={() => handleRemoveImage(index)} className='p-3 uppercase text-red-700 rounded-lg hover:opacity-95'>
                                 Delete
                             </button>

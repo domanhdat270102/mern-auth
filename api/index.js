@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 import listingRouter from './routes/listing.route.js'
+import forgotPasswordRouter from './routes/forgotPassword.route.js'
+import otpRouter from './routes/otp.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path'
 dotenv.config()
@@ -26,6 +28,8 @@ app.use(cookieParser())
 app.use("/api/user", userRouter)
 app.use("/api/auth", authRouter)
 app.use('/api/listing', listingRouter)
+app.use('/api/forgot-password', forgotPasswordRouter)
+app.use('/api/otp', otpRouter)
 
 
 app.use(express.static(path.join(__dirname, '/client/dist')))

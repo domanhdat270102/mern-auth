@@ -166,6 +166,7 @@ const handleListingDelete = async (listingId) => {
             accept="image/*"/> 
           <img 
             onClick={() => fileRef.current.click()} 
+            loading="lazy"
             src={formData?.avatar || currentUser.avatar} 
             alt="profile" 
             className="rounded-full w-24 h-24 self-center object-cover cursor-pointer mt-2"
@@ -243,7 +244,7 @@ const handleListingDelete = async (listingId) => {
                 {userListings.map(listing => (
             <div key={listing._id} className="border rounded-lg p-3 flex justify-between items-center gap-4">
                 <Link to={`/listing/${listing._id}`}>
-                    <img src={listing.imageUrls[0]} alt="listing cover" className="h-16 w-16 object-contain" />
+                    <img loading="lazy" src={listing.imageUrls[0]} alt="listing cover" className="h-16 w-16 object-contain" />
                 </Link>
 
                 <Link to={`/listing/${listing._id}`} className="text-slate-700 font-semibold hover:underline flex-1 truncate" >
