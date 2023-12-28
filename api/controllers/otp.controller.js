@@ -1,13 +1,13 @@
 import OTP from "../models/otp.model.js";
 import { catchAsync } from "../util/catchAsync.js";
+import { errorHandler } from "../util/error.js";
 import generateOTP from "../util/generateOTP.js";
 import { hashData, verifyHashedData } from "../util/hashData.js";
 import sendEmail from "../util/sendEmail.js";
 const {AUTH_EMAIL} = process.env;
 
-export const verifyOTP = catchAsync(async (req, res, next) => {
-        let { email, otp} = req.body;
-
+export const verifyOTP = async ({email, otp}) => {
+    try {
         if (!(email && otp)) {
             throw Error("Provide values for email, otp")
         }
@@ -32,10 +32,11 @@ export const verifyOTP = catchAsync(async (req, res, next) => {
         // not expired yet, verify value
         const hashedOTP = matchedOTPRecord.otp
         const validOTP = await verifyHashedData(otp, hashedOTP)
-        res.status(200).json({
-            valid: validOTP
-        })
-})
+        return validOTP
+    } catch (error) {
+        throw error
+    }
+}
 
 export const deleteOTP = catchAsync(async (email) => {
     await OTP.deleteOne({email})

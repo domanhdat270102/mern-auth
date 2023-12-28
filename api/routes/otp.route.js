@@ -1,9 +1,8 @@
 import express from 'express'
-import { sendOTP, verifyOTP } from '../controllers/otp.controller.js';
+import { sendOTP} from '../controllers/otp.controller.js';
 
 const router = express.Router();
 
-router.post('/verify', verifyOTP)
 router.post('/', async (req, res) => {
     try {
         const {email, subject, message, duration} = req.body

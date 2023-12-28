@@ -3,13 +3,18 @@ import User from "../models/user.model.js"
 import { catchAsync } from "../util/catchAsync.js"
 import { errorHandler } from "../util/error.js"
 import { hashData } from "../util/hashData.js"
-import { sendOTP } from "./otp.controller.js"
+import { sendOTP, verifyOTP } from "./otp.controller.js"
 
 export const resetUserPassword =  catchAsync(async (req, res, next) => {
         let {email, otp, newPassword} = req.body
         if (!(email && otp && newPassword)) {
             return next(errorHandler(401,"Empty credentials are not allowed"))
         }
+        const validOTP = await verifyOTP({email, otp})
+        if (!validOTP) {
+            throw Error("Invalid code passed. Check your inbox")
+        }
+
         const hashedNewPassword = await hashData(newPassword)
 
         await User.updateOne({email}, {password: hashedNewPassword})

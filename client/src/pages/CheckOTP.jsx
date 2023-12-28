@@ -54,7 +54,7 @@ export default function ForgotPassword() {
             // setLoading(false)
             // setError(error.message)
             dispatch(signInFailure(error.message))
-            toast.error(error.message)
+            toast.error('OTP không khớp')
           }
 }})
 
