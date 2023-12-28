@@ -236,24 +236,24 @@ export default function Search() {
     const [showMore, setShowMore] = useState(false)
     console.log(listings);
     const parsedQueryParams = queryString.parse(location.search);
-    // useEffect(() => {
-    //     // Xác định các tham số từ URL và cập nhật sidebardata nếu cần
-    //     const queryParams = {
-    //         searchTerm: parsedQueryParams.searchTerm || '',
-    //         type: parsedQueryParams.type || 'all',
-    //         parking: parsedQueryParams.parking === 'true' ? true : false,
-    //         furnished: parsedQueryParams.furnished === 'true' ? true : false,
-    //         offer: parsedQueryParams.offer === 'true' ? true : false,
-    //         sort: parsedQueryParams.sort || 'created_at',
-    //         order: parsedQueryParams.order || 'desc'
-    //     };
+    useEffect(() => {
+        // Xác định các tham số từ URL và cập nhật sidebardata nếu cần
+        const queryParams = {
+            searchTerm: parsedQueryParams.searchTerm || '',
+            type: parsedQueryParams.type || 'all',
+            parking: parsedQueryParams.parking === 'true' ? true : false,
+            furnished: parsedQueryParams.furnished === 'true' ? true : false,
+            offer: parsedQueryParams.offer === 'true' ? true : false,
+            sort: parsedQueryParams.sort || 'created_at',
+            order: parsedQueryParams.order || 'desc'
+        };
 
-    //     // Kiểm tra xem có giá trị nào đó không phải mặc định không, nếu có thì cập nhật sidebardata
-    //     if (Object.values(queryParams).some(value => value)) {
-    //         setSidebardata(queryParams);
-    //     }
-    //     console.log('a', queryParams);
-    // }, [location.search]);
+        // Kiểm tra xem có giá trị nào đó không phải mặc định không, nếu có thì cập nhật sidebardata
+        if (Object.values(queryParams).some(value => value)) {
+            setSidebardata(queryParams);
+        }
+        console.log('a', queryParams);
+    }, [location.search]);
 
 
     useEffect(() => {
