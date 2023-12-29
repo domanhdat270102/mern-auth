@@ -78,6 +78,7 @@ import { FaSearch } from "react-icons/fa";
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
 import queryString from "query-string";
+import HeaderSeo from "./HeaderSeo";
 export default function Header() {
   const navigate = useNavigate()
   const {currentUser} = useSelector(state => state.user)
@@ -102,6 +103,10 @@ export default function Header() {
   },[location.search])
   return (
     <header className="bg-slate-200 shadow-md">
+      <HeaderSeo
+       title="Tìm kiếm bất động sản cho riêng mình"
+       description="Estate - Nhanh chóng chớp tìm kiếm việc bất động sản cho riêng mình"
+      />
         <div className="max-w-6xl mx-auto flex justify-between items-center p-3">
           <Link to='/'>
             <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">

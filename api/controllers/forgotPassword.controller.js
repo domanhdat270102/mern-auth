@@ -28,6 +28,7 @@ export const sendPasswordResetOTPEmail = catchAsync(async (req, res, next) => {
         if (!email) return next(errorHandler(401, 'An email is required'))
 
         const existingUser = await User.findOne({email});
+
         if (!existingUser) return next(errorHandler(401, "There's no account for the provied email."))
 
         const otpDetails = {
@@ -39,6 +40,9 @@ export const sendPasswordResetOTPEmail = catchAsync(async (req, res, next) => {
 
         const createOTP = await sendOTP(otpDetails)
         res.status(200).json({
-            status: 'success'
+            status: 'success',
+            data: {
+                createOTP
+            }
         }) 
 })
