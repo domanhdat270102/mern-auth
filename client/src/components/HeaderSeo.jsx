@@ -16,7 +16,7 @@ function HeaderSeo({ title, description }) {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content={`${mainUrl}/logo_mpb.png`} />
+      <meta property="og:image" content={`${mainUrl}/MPB Logo-03.png`} />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />
     </Helmet>
