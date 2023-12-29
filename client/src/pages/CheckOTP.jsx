@@ -49,7 +49,7 @@ export default function ForgotPassword() {
             toast.success('Thành công')
             setTimeout(() => {
               navigate('/sign-in')
-            }, 2000)
+            }, 1000)
           } catch (error) {
             // setLoading(false)
             // setError(error.message)

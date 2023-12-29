@@ -57,6 +57,7 @@ const listingSchema = new mongoose.Schema({
     timestamps: true
 })
 
+listingSchema.index({regularPrice: 1, discountPrice: 1, bathrooms: 1, bathrooms: 1})
 const Listing = mongoose.model('Listing', listingSchema);
 
 export default Listing
