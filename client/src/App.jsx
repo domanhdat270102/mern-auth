@@ -13,7 +13,7 @@ import Search from "./pages/Search"
 import { Toaster } from 'react-hot-toast';
 import ForgotPassword from "./pages/ForgotPassword"
 import CheckOTP from "./pages/CheckOTP"
-import Protect from "./components/protect"
+import Protect from "./components/Protect"
 const App = () => {
   return (
   <BrowserRouter>
