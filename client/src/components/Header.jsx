@@ -125,7 +125,7 @@ export default function Header() {
                 type="text"
                 onFocus={() => setFocus(true)} 
               />
-              {!focus ? (
+              {!focus && searchTerm === '' ? (
                 <span className="absolute">
                 <TypeAnimation 
                   sequence={[

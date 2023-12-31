@@ -23,38 +23,38 @@ export default function ForgotPassword() {
             ...values
           }
           try {
-            dispatch(signInStart())
-            const res = await fetch('/api/forgot-password', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(dataLogin),
-            })
-        
-            const data = await res.json()
-            if (data.success === false) {
-              // setError(data.message);
-              // setLoading(false)
-              dispatch(signInFailure(data.message));
-              toast.error('email chưa được tạo, vui lòng khởi tạo email trước')
-              return;
-            }
-            // setLoading(false)
-            // setError(null)
-            dispatch(sendEmailSuccess(data))
-            toast.success('Đã gửi OTP đến gmail của bạn')
-            setTimeout(() => {
-              navigate('/check-otp', {
-                state: loginFormik.values.email
+              dispatch(signInStart())
+              const res = await fetch('/api/forgot-password', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataLogin),
               })
-            }, 2000)
-          } catch (error) {
-            // setLoading(false)
-            // setError(error.message)
-            dispatch(signInFailure(error.message))
-            toast.error(error.message)
-          }
+          
+              const data = await res.json()
+              if (data.success === false) {
+                // setError(data.message);
+                // setLoading(false)
+                dispatch(signInFailure(data.message));
+                toast.error('email chưa được tạo, vui lòng khởi tạo email trước')
+                return;
+              }
+              // setLoading(false)
+              // setError(null)
+              dispatch(sendEmailSuccess(data))
+              toast.success('Đã gửi OTP đến gmail của bạn')
+              setTimeout(() => {
+                navigate('/check-otp', {
+                  state: loginFormik.values.email
+                })
+              }, 2000)
+            } catch (error) {
+              // setLoading(false)
+              // setError(error.message)
+              dispatch(signInFailure(error.message))
+              toast.error(error.message)
+            }
 }})
 
 console.log('loginFormik.values.email', loginFormik.values.email);
