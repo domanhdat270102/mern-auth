@@ -121,7 +121,7 @@ export default function Header() {
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)} 
-                className="bg-transparent focus:outline-none w-24 sm:w-64 relative"
+                className="bg-transparent focus:outline-none w-24 sm:w-64 relative z-10"
                 type="text"
                 onFocus={() => setFocus(true)} 
               />
@@ -136,14 +136,14 @@ export default function Header() {
                     'Thuê nhà ở',
                     2000
                   ]}
-                  speed={50}
+                  speed={20}
                   wrapper='span'
                   repeat={Infinity}
                   cursor={false}
-                  className="text-gray-500"
+                  className="text-gray-500 line-clamp-1"
                 />
               </span>
-              ) : <span className="absolute text-gray-500">Search ...</span>}
+              ) : (searchTerm === '' && <span className="absolute text-gray-500 -z-1">Search ...</span>)}
               <button>
                 <FaSearch className="text-slate-600" />
               </button>
