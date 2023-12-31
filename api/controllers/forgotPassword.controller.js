@@ -28,6 +28,7 @@ export const sendPasswordResetOTPEmail = catchAsync(async (req, res, next) => {
             if (!email) return next(errorHandler(401, 'An email is required'))
 
             const existingUser = await User.findOne({email});
+            console.log(existingUser);
 
             if (!existingUser) return next(errorHandler(401, "There's no account for the provied email."))
 
