@@ -79,10 +79,12 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
 import queryString from "query-string";
 import HeaderSeo from "./HeaderSeo";
+import { TypeAnimation } from "react-type-animation";
 export default function Header() {
   const navigate = useNavigate()
   const {currentUser} = useSelector(state => state.user)
   const [searchTerm, setSearchTerm] = useState('')
+  const [focus, setFocus] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault();
     // const urlParams = new URLSearchParams(window.location.search)
@@ -116,7 +118,32 @@ export default function Header() {
           </Link>
 
             <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center">
-              <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search..." className="bg-transparent focus:outline-none w-24 sm:w-64"/>
+              <input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} 
+                className="bg-transparent focus:outline-none w-24 sm:w-64 relative"
+                type="text"
+                onFocus={() => setFocus(true)} 
+              />
+              {!focus ? (
+                <span className="absolute">
+                <TypeAnimation 
+                  sequence={[
+                    'Tìm bất động sản',
+                    2000,
+                    'Tìm nhà ở',
+                    2000,
+                    'Thuê nhà ở',
+                    2000
+                  ]}
+                  speed={50}
+                  wrapper='span'
+                  repeat={Infinity}
+                  cursor={false}
+                  className="text-gray-500"
+                />
+              </span>
+              ) : <span className="absolute text-gray-500">Search ...</span>}
               <button>
                 <FaSearch className="text-slate-600" />
               </button>
