@@ -14,6 +14,7 @@ import { Toaster } from 'react-hot-toast';
 import ForgotPassword from "./pages/ForgotPassword"
 import CheckOTP from "./pages/CheckOTP"
 import Protect from "./components/Protect"
+import FacebookMsg from "./utils/FacebookMsg"
 const App = () => {
   return (
   <BrowserRouter>
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/update-listing/:listingId" element={<UpdateListing />}/>
       </Route>
     </Routes>
+    <FacebookMsg />
   </BrowserRouter>
   )
 }
